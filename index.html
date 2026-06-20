@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UNGRIFF | Official Fashion Store</title>
 
+<link rel="icon" type="image/png" href="Nouveau projet (1).png">
+
 <style>
 :root {
     --bg-main: #000000;
@@ -110,8 +112,9 @@ header {
 
 .logo-img {
     height: 55px;
-    width: auto;
-    object-fit: contain;
+    width: 55px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .site-title {
@@ -192,6 +195,15 @@ button {
 
 .main-section { padding: 40px 0; }
 .products-grid { display: grid; gap: 30px; grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .products-grid { grid-template-columns: repeat(1, 1fr); }
+    .header-wrap { flex-direction: column; gap: 15px; }
+    .search-box { width: 100%; margin: 10px 0; }
+}
 
 .product-card {
     background-color: var(--bg-card);
@@ -290,7 +302,6 @@ input, textarea, select {
 .auth-toggle span { cursor: pointer; color: var(--text-secondary); font-weight: 600; padding-bottom: 5px; }
 .auth-toggle span.active { color: var(--text-main); border-bottom: 2px solid var(--accent); }
 
-/* Lien dissimulé ou discret de renvoi de code */
 .resend-link {
     display: inline-block;
     color: var(--text-secondary);
@@ -523,9 +534,7 @@ function resetAuthModalView() {
 }
 
 function triggerCodeGeneration(isResend = false) {
-    // Génération d'un vrai code à 6 chiffres aléatoires uniques à chaque fois
     generatedSecurityCode = Math.floor(100000 + Math.random() * 900000).toString();
-    
     if (isResend) {
         alert("✉️ [Nouveau Code Envoyé]\nUn tout nouveau code de vérification vient d'être généré.\n\nVotre nouveau code est : " + generatedSecurityCode);
     } else {
